@@ -1,0 +1,3 @@
+= ACE base image
+
+ACE base image used to build BAR-files and run ACE integration server.
