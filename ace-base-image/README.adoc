@@ -1,3 +1,7 @@
 = ACE base image
 
 ACE base image used to build BAR-files and run ACE integration server.
+
+Base image is automatically built when new commit is pushed to the base-branch.
+
+When updating Dockerfile, remember to checkout base-branch and push to repository.
