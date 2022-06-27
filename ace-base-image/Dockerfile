@@ -1,4 +1,5 @@
 #This Docker file is based on https://github.com/ot4i/ace-docker
+#Base ACE image, includes ACE developer edition
 
 FROM registry.access.redhat.com/ubi8/ubi-minimal:8.6
 
