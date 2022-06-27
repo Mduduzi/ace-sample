@@ -1,7 +1,7 @@
 #This Docker file is based on https://github.com/ot4i/ace-docker
 #Base ACE image, includes ACE developer edition
 
-FROM registry.access.redhat.com/ubi8/ubi-minimal:8.6
+FROM registry.access.redhat.com/ubi8/ubi-minimal:8.6 as builder
 
 RUN microdnf update && microdnf install util-linux curl tar
 
@@ -21,3 +21,16 @@ RUN mkdir -p /opt/ibm/ace-12 \
     --exclude ace-12.0.*.0/server/transformationAdvisor/ta-plugin-ace.jar \
     --strip-components 1 \
     --directory /opt/ibm/ace-12
+
+#create base image
+FROM registry.access.redhat.com/ubi8/ubi-minimal:8.6
+
+#update/install packages
+RUN microdnf update && \ 
+    microdnf install findutils util-linux curl tar && \
+    microdnf clean all && \
+    microdnf reinstall tzdata -y
+# Note: force reinstall tzdata package to get zoneinfo files
+
+#copy ACE from builder
+COPY --from=builder /opt/ibm/ace-12 /opt/ibm/ace-12
