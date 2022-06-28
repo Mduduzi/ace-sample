@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="8.0.5.0" xmlns:map="default">
+    <inlinedXMLSchema><![CDATA[<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">    
+            <xsd:element name="Message" type="xsd:string"/> 
+    <xsd:element name="message" nillable="true" type="xsd:string"/> 
+    <xsd:element name="output2" nillable="true" type="xsd:string"/>    
+    <xsd:element name="output1" nillable="true" type="xsd:string"/>    
+    <xsd:element name="input2" nillable="true" type="xsd:string"/>    
+    <xsd:element name="input1" nillable="true" type="xsd:string"/>    
+</xsd:schema>]]></inlinedXMLSchema>
+    <input path="jar:file://!com/ibm/etools/mft/map/xsds/assembly/Environment.xsd" var="var4"/>
+    <input path="jar:file://!com/ibm/etools/mft/map/xsds/predefined/JsonDomainMsg.xsd" var="var"/>
+    <input inlinedXMLSchema="true" path="../schema_0.xsd" var="var2"/>
+    <output path="jar:file://!com/ibm/etools/mft/map/xsds/assembly/Environment.xsd" var="var6"/>
+    <output path="jar:file://!com/ibm/etools/mft/map/xsds/predefined/JsonDomainMsg.xsd" var="var1"/>
+    <namespaces>
+        <namespace kind="supplement" prefix="io" uri="http://www.ibm.com/iib/msl/json"/>
+    </namespaces>
+    <generation engine="xquery"/>
+    <mappingDeclaration name="MessageMapping">
+        <input path="$var4/mb:env(Environment)" var="Environment">
+            <cast castType="userDefined" path="$Environment/Variables/any" qualifier="Message" ref="var2" var="any7"/>
+        </input>
+        <input namespace="http://www.ibm.com/iib/msl/json" path="$var/mb:msg(JSON,assembly,JSON,Properties)" var="MessageAssembly">
+            <cast castType="userDefined" path="$MessageAssembly/JSON/Data/type('anyType')" qualifier="{http://www.ibm.com/iib/msl/json}JSONObject" ref="var" var="anyType"/>
+            <cast castType="userDefined" path="$MessageAssembly/JSON/spath('Data',2)/any" qualifier="input1" ref="var2" var="any1"/>
+            <cast castType="userDefined" path="$MessageAssembly/JSON/spath('Data',2)/any" qualifier="input2" ref="var2" var="any2"/>
+        </input>
+        <output path="$var6/mb:env(Environment)" var="Environment2">
+            <cast castType="userDefined" path="$Environment2/Variables/any" qualifier="Message" ref="var2" var="any8"/>
+        </output>
+        <output namespace="http://www.ibm.com/iib/msl/json" path="$var1/mb:msg(JSON,assembly,JSON,Properties)" var="MessageAssembly2">
+            <cast castType="userDefined" path="$MessageAssembly2/JSON/Data/type('anyType')" qualifier="{http://www.ibm.com/iib/msl/json}JSONObject" ref="var1" var="anyType1"/>
+            <cast castType="userDefined" path="$MessageAssembly2/JSON/spath('Data',2)/any" qualifier="output1" ref="var2" var="any4"/>
+            <cast castType="userDefined" path="$MessageAssembly2/JSON/spath('Data',2)/any" qualifier="output2" ref="var2" var="any5"/>
+            <cast castType="userDefined" path="$MessageAssembly2/JSON/spath('Data',2)/any" qualifier="message" ref="var2" var="any6"/>
+        </output>
+        <passthrough>
+            <input path="$Environment/."/>
+            <output path="$Environment2/."/>
+            <updates/>
+        </passthrough>
+        <move>
+            <input path="$MessageAssembly/Properties"/>
+            <output path="$MessageAssembly2/Properties"/>
+        </move>
+        <move>
+            <input path="$MessageAssembly/JSON/spath('Data',2)/input2"/>
+            <output path="$MessageAssembly2/JSON/spath('Data',2)/output2"/>
+        </move>
+        <move>
+            <input path="$MessageAssembly/JSON/spath('Data',2)/input1"/>
+            <output path="$MessageAssembly2/JSON/spath('Data',2)/output1"/>
+        </move>
+        <move>
+            <input path="$Environment/Variables/Message"/>
+            <output path="$MessageAssembly2/JSON/spath('Data',2)/message"/>
+        </move>
+    </mappingDeclaration>
+</mappingRoot>
