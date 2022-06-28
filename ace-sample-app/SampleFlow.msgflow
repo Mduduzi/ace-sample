@@ -14,7 +14,7 @@
         <shortDescription xmi:type="utility:ConstantString" string="Input-output message mapping"/>
       </nodes>
       <nodes xmi:type="ComIbmWSInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="32,32" URLSpecifier="/" messageDomainProperty="JSON" identityTokenLocation="$Environment.Variables.UserName">
-        <translation xmi:type="utility:ConstantString" string="HTTP Input"/>
+        <translation xmi:type="utility:ConstantString" string="HTTPInput"/>
       </nodes>
       <nodes xmi:type="ComIbmWSReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="531,298">
         <translation xmi:type="utility:ConstantString" string="HTTP Reply"/>
