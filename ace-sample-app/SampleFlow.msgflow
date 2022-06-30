@@ -9,14 +9,14 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/ace-sample-app/icons/full/obj16/SampleFlow.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/ace-sample-app/icons/full/obj30/SampleFlow.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="362,185" mappingExpression="msl://{default}#MessageMapping">
+      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="380,143" mappingExpression="msl://{default}#MessageMapping">
         <translation xmi:type="utility:ConstantString" string="Mapping"/>
         <shortDescription xmi:type="utility:ConstantString" string="Input-output message mapping"/>
       </nodes>
       <nodes xmi:type="ComIbmWSInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="32,32" URLSpecifier="/" messageDomainProperty="JSON" identityTokenLocation="$Environment.Variables.UserName">
         <translation xmi:type="utility:ConstantString" string="HTTPInput"/>
       </nodes>
-      <nodes xmi:type="ComIbmWSReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="531,298">
+      <nodes xmi:type="ComIbmWSReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="570,62">
         <translation xmi:type="utility:ConstantString" string="HTTP Reply"/>
       </nodes>
       <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_11" location="195,90" computeExpression="esql://routine/#SampleFlow_Compute.Main">
@@ -32,6 +32,13 @@
         <propertyName xmi:type="utility:TranslatableString" key="Property.message" bundleName="SampleFlow" pluginId="ace-sample-app"/>
       </propertyDescriptor>
     </propertyOrganizer>
-    <stickyBoard/>
+    <stickyBoard>
+      <stickyNote location="34,216" association="FCMComposite_1_11">
+        <body xmi:type="utility:ConstantString" string="ESQL Node. Set&#xA;user defined properties as &#xA;environment variables to be &#xA;used later in the flow."/>
+      </stickyNote>
+      <stickyNote location="328,244" association="FCMComposite_1_5">
+        <body xmi:type="utility:ConstantString" string="Mapping node that maps &#xA;input fields to fields and adds &#xA;values in environment variable &#xA;to output message."/>
+      </stickyNote>
+    </stickyBoard>
   </eClassifiers>
 </ecore:EPackage>
