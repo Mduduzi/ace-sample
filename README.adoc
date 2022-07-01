@@ -29,6 +29,7 @@ Sample commands and output:
 
 This repo and container is built on following premises:
 
+* IBM App Connect Enterprise version is 12.x.
 * IBM App Connect Enterprise is the developer edition.
 * Integration application development is done using ACE toolkit in developer workstation.
 * All development is done in developer workstation.
@@ -67,12 +68,25 @@ See link:start.sh[start.sh] for more details.
 
 == Usage
 
-Build container
+* Sample container is available from Dockerhub
+** https://hub.docker.com/repository/docker/kazhar/ace-sample 
+* Build container:
+```
+docker build -t acesample .
+```
+* Run container in foreground:
+```
+docker run -it --rm -p 7800:7800 -p 7600:7600 acesample
+```
+* Access the integration application in the container.
+** Use browser or curl:
+```
+curl http://localhost:7800
+```
+* Access admin dashboard:
+** http://localhost:7600
+* Set environment variables during startup:
+```
+docker run -it --rm -p 7800:7800 -p 7600:7600 -e ACE_PROPERTY_OVERRIDES=SampleFlow#message="Hello there!" acesample
+```
 
-Start container
-
-Access integration
-
-Access admin dashboard
-
-Environment variables
