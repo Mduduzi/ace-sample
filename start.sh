@@ -55,6 +55,14 @@ echo "Installing bar-file...done."
 if [ "$ACE_START_BASH" = "true" ]; then
     #start bash if env var is true, useful for test/development
     echo "Starting bash..."
+    #create start integration server script
+cat > integrationserver-start << EOF
+#!/bin/bash
+IntegrationServer --work-dir $ACE_WORKING_DIR
+EOF
+    chmod 755 integrationserver-start
+    echo "Start IntegrationServer using:"
+    echo "$(pwd)/integrationserver-start"
     exec bash
 else
     #start server
