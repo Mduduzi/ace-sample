@@ -83,15 +83,19 @@ docker build -t acesample .
 ```
 docker run -it --rm -p 7800:7800 -p 7600:7600 acesample
 ```
-** The admin dashboard runs on port 7600. Do not expose that port if dashboard access is not needed.
+* The admin dashboard runs on port 7600. Do not expose that port if dashboard access is not needed.
 * Access the integration application in the container.
 ** Use browser or curl:
 ```
 curl http://localhost:7800
 ```
-* Access admin dashboard:
-** http://localhost:7600
 * Set environment variables during startup:
 ```
 docker run -it --rm -p 7800:7800 -p 7600:7600 -e ACE_PROPERTY_OVERRIDES=SampleFlow#message="Hello there!" acesample
 ```
+* Access admin dashboard:
+** http://localhost:7600
+
+
+.Flow statistics page in the admin dashboard
+image::images/ace-dashboard.png[IBM App Connect - flow statistics]
