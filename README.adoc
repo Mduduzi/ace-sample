@@ -8,7 +8,7 @@ This repository includes sample integration application built with https://www.i
 
 The purpose of this repo, the integration application and Dockerfile is to provide an example how a single integration application is provided as container image and how to configure container using environment variables. 
 
-Use this repo as an example how to create container from your own ACE-project.
+Use this repo as an example how to create a container from your own ACE-project(s).
 
 Note that this repo provides one example, but https://en.wikipedia.org/wiki/There%27s_more_than_one_way_to_do_it[there is more than one way to do it].
 
@@ -29,7 +29,7 @@ Sample commands and output:
 
 == Development
 
-This repo and container is built on following premises:
+The application and container in this repo are developed using the following assumptions:
 
 * IBM App Connect Enterprise version is 12.x.
 * IBM App Connect Enterprise is the developer edition.
@@ -83,6 +83,7 @@ docker build -t acesample .
 ```
 docker run -it --rm -p 7800:7800 -p 7600:7600 acesample
 ```
+** The admin dashboard runs on port 7600. Do not expose that port if dashboard access is not needed.
 * Access the integration application in the container.
 ** Use browser or curl:
 ```
