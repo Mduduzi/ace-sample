@@ -8,12 +8,14 @@ This repository includes sample integration application built with https://www.i
 
 The purpose of this repo, the integration application and Dockerfile is to provide an example how a single integration application is provided as container image and how to configure container using environment variables. 
 
+Use this repo as an example how to create container from your own ACE-project.
+
 Note that this repo provides one example, but https://en.wikipedia.org/wiki/There%27s_more_than_one_way_to_do_it[there is more than one way to do it].
 
 
 == Application
 
-The application is a very simple integration with HTTP input interface that outputs JSON message or transforms input field to output field. The application is based on https://github.com/ot4i/http-input-tutorial[existing sample].
+The application is a very simple integration with HTTP input interface that outputs JSON message or transforms input field to output field. The application is based on https://github.com/ot4i/http-input-tutorial[an existing sample].
 
 Sample commands and output:
 
@@ -41,6 +43,9 @@ This repo and container is built on following premises:
 * Developer is responsible for application and ACE lifecycle, updating when required.
 * Developer builds image and pushes it to registry.
 
+.The sample application developed using IBM App Connect Enterprise Toolkit
+image::images/ACE-app-1.png[IBM App Connect Enterprise Toolkit - the application]
+
 == Container
 
 There are three Dockerfiles in this repository:
@@ -60,9 +65,9 @@ The link:start.sh[start.sh]-script does the following every time the container s
 
 * Initializes ACE environment.
 * Creates bar-file.
-* Overrides properties in bar-file, if given as environment variables.
+* Overrides properties in bar-file, if properties are given in _ACE_PROPERTY_OVERRIDES_ environment variable.
 * Installs bar-file to integration server in the container.
-* Starts integration server.
+* Starts the integration server.
 
 See link:start.sh[start.sh] for more details.
 
@@ -89,4 +94,3 @@ curl http://localhost:7800
 ```
 docker run -it --rm -p 7800:7800 -p 7600:7600 -e ACE_PROPERTY_OVERRIDES=SampleFlow#message="Hello there!" acesample
 ```
-
