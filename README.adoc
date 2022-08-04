@@ -1,4 +1,4 @@
-= IBM App Connect Enterprise - sample integration application
+= IBM App Connect Enterprise - integration application in a container
 :toc: left
 :toc-title: Table of Contents
 
