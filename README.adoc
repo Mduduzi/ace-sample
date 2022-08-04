@@ -6,11 +6,11 @@ This repository includes sample integration application built with https://www.i
 
 == Purpose
 
-The purpose of this repo, the integration application and Dockerfile is to provide an example how a single integration application is provided as container image and how to configure container using environment variables. 
+The purpose of this repo, the integration application and Dockerfile is to provide an example how a single integration application can be provided as container image and how to configure container using environment variables. 
 
 Use this repo as an example how to create a container from your own ACE-project(s).
 
-Note that this repo provides one example, but https://en.wikipedia.org/wiki/There%27s_more_than_one_way_to_do_it[there is more than one way to do it].
+This repo provides one example, but https://en.wikipedia.org/wiki/There%27s_more_than_one_way_to_do_it[there is more than one way to do it].
 
 
 == Application
@@ -38,28 +38,23 @@ The application and container in this repo are developed using the following ass
 ** Integration server for testing runs inside toolkit.
 * All integration application artifacts are inside single project.
 ** Sample project is in link:ace-sample-app/[ace-sample-app]-directory.
-* Developer does not build bar-files, nor deploys application to external server.
+* Developer does not build bar-file, nor deploy application to external server.
 * Developer is responsible for writing the Dockerfile.
 * Developer is responsible for application and ACE lifecycle, updating when required.
-* Developer builds image and pushes it to registry.
-
-.The sample application developed using IBM App Connect Enterprise Toolkit
-image::images/ACE-app-1.png[IBM App Connect Enterprise Toolkit - the application]
 
 == Container
 
-There are three Dockerfiles in this repository:
+There are two Dockerfiles in this repository:
 
 * link:ace-base-image/Dockerfile[ace-base-image/Dockerfile] is the base image.
 ** Downloads and extracts ACE Developer edition (from http://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/integration/).
 *** Version is given in the Dockerfile
 ** Updates the Red Hat UBI base image.
-* link:Dockerfile[Dockerfile] is the main image.
+* link:Dockerfile[Dockerfile] is the main image and it uses the base image.
 ** Sets up ACE, adds application sources and other files.
 ** It is based on https://github.com/ot4i/ace-docker.
-* link:Dockerfile-with-ace-install[Dockerfile-with-ace-install] combines the base and main image files.
 
-The final entry in Dockerfile is CMD that calls the link:start.sh[start.sh]-script.
+The final entry in the Dockerfile is CMD that calls the link:start.sh[start.sh]-script.
 
 The link:start.sh[start.sh]-script does the following every time the container starts:
 
@@ -71,10 +66,11 @@ The link:start.sh[start.sh]-script does the following every time the container s
 
 See link:start.sh[start.sh] for more details.
 
+Note that link:ace-base-image/Dockerfile[ace-base-image/Dockerfile] and link:Dockerfile[Dockerfile] can be combined in a single Dockerfile.
+
 == Usage
 
-* Sample container is available from Dockerhub
-** https://hub.docker.com/repository/docker/kazhar/ace-sample 
+* Download/clone this repository.
 * Build container:
 ```
 docker build -t acesample .
@@ -93,9 +89,39 @@ curl http://localhost:7800
 ```
 docker run -it --rm -p 7800:7800 -p 7600:7600 -e ACE_PROPERTY_OVERRIDES=SampleFlow#message="Hello there!" acesample
 ```
+* _ACE_PROPERTY_OVERRIDES_ variable includes comma-separated list of configurable properties. 
 * Access admin dashboard:
 ** http://localhost:7600
+* Sample container is also available from Dockerhub: https://hub.docker.com/repository/docker/kazhar/ace-sample.
 
+== Environment variables
+
+.Environment variables that can be used when starting the container.
+|===
+|Name|Value|Default|Description
+
+|ACE_APPNAME
+|any string
+|integration-application
+|Application name. Application is installed in _/home/aceuser/$ACE_APPNAME_-directory in the container. Application name is also visible in admin dashboard.
+
+|ACE_PROPERTY_OVERRIDES
+|<comma-separated list of of configurable properties>
+|
+|Configurable properties must be included in the integration application during development. For example, to change the default message in output JSON, the value is ```SampleFlow#message="Hello there!"```. See https://www.ibm.com/docs/en/app-connect/12.0?topic=common-mqsiapplybaroverride-command for syntax of properties.
+
+|ACE_START_BASH
+|true
+|
+|If true, bash-shell is started instead of integration server when container is started.
+
+
+|===
+
+== Images
+
+.The sample application developed using IBM App Connect Enterprise Toolkit
+image::images/ACE-app-1.png[IBM App Connect Enterprise Toolkit - the application]
 
 .Flow statistics page in the admin dashboard
 image::images/ace-dashboard.png[IBM App Connect - flow statistics]

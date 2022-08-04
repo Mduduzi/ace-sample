@@ -6,7 +6,6 @@
 #is not downloaded every time this image is built (see Dockerfile-with-ace-install).
 FROM kazhar/ace-sample:base
 
-#accept license
 ENV LICENSE=accept
 ENV ACE_WORKING_DIR=/home/aceuser/ace-server
 
@@ -20,12 +19,12 @@ WORKDIR /home/aceuser
 # Add required license as text file in Licenses directory (GPL, MIT, APACHE, Partner End User Agreement, etc)
 COPY licenses/ ./licenses/
 
-#add integration application sources
+# add integration application sources
 COPY ace-sample-app/ ./src/
 
 COPY start.sh .
 
-# Expose ports.  7600, 7800, 7843 for ACE.
+# Expose ports.  7600 is admin port, 7800 is HTTP port, 7843 is HTTPS port.
 EXPOSE 7600 7800 7843
 
 #change ownership of all files in /home/aceuser directory
