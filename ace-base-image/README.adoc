@@ -6,4 +6,6 @@ Base image is automatically built when new commit is pushed to the base-branch.
 
 Base-image and base-branch is provided because installing ACE Developer Edition requires downloading a file from IBM site and extracting it. By providing base-image, download happens only when base-image is updated.
 
+Base image includes ACE Developer Edition. Check the latest downloadable version from http://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/integration/. 
+
 When updating link:Dockerfile[Dockerfile], remember to checkout base-branch and push to repository.
