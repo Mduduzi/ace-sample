@@ -59,6 +59,7 @@ The final entry in the Dockerfile is CMD that calls the link:start.sh[start.sh]-
 The link:start.sh[start.sh]-script does the following every time the container starts:
 
 * Initializes ACE environment.
+* Sets up admin authentication, if ACE_ENABLE_ADMIN_AUTHENTICATION environment variable is set.
 * Creates bar-file.
 * Overrides properties in bar-file, if properties are given in _ACE_PROPERTY_OVERRIDES_ environment variable.
 * Installs bar-file to integration server in the container.
@@ -85,9 +86,12 @@ docker run -it --rm -p 7800:7800 -p 7600:7600 acesample
 ```
 curl http://localhost:7800
 ```
-* Set environment variables during startup:
+* Set environment variables during startup, for example:
 ```
 docker run -it --rm -p 7800:7800 -p 7600:7600 -e ACE_PROPERTY_OVERRIDES=SampleFlow#message="Hello there!" acesample
+
+docker run -it --rm -p 7800:7800 -p 7600:7600 -e ACE_ENABLE_ADMIN_AUTHENTICATION=true -e ACE_ADMIN_USER_PASSWORD=passw0rd acesample
+
 ```
 * _ACE_PROPERTY_OVERRIDES_ variable includes comma-separated list of configurable properties. 
 * Access admin dashboard:
@@ -101,7 +105,7 @@ docker run -it --rm -p 7800:7800 -p 7600:7600 -e ACE_PROPERTY_OVERRIDES=SampleFl
 |Name|Value|Default|Description
 
 |ACE_APPNAME
-|any string
+|<any string>
 |integration-application
 |Application name. Application is installed in _/home/aceuser/$ACE_APPNAME_-directory in the container. Application name is also visible in admin dashboard.
 
@@ -109,6 +113,21 @@ docker run -it --rm -p 7800:7800 -p 7600:7600 -e ACE_PROPERTY_OVERRIDES=SampleFl
 |<comma-separated list of of configurable properties>
 |
 |Configurable properties must be included in the integration application during development. For example, to change the default message in output JSON, the value is ```SampleFlow#message="Hello there!"```. See https://www.ibm.com/docs/en/app-connect/12.0?topic=common-mqsiapplybaroverride-command for syntax of properties.
+
+|ACE_ENABLE_ADMIN_AUTHENTICATION
+|true
+|
+|If true, sets up authentication to admin dashboard.
+
+|ACE_ADMIN_USER_NAME
+|<any string>
+|admin
+|Admin user name.
+
+|ACE_ADMIN_USER_PASSWORD
+|<any string>
+|
+|Admin user password. Must be set if ACE_ENABLE_ADMIN_AUTHENTICATION is true.
 
 |ACE_START_BASH
 |true

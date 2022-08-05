@@ -13,6 +13,38 @@ fi
 #change source directory name to application name
 mv src $ACE_APPNAME
 
+#set up admin authentication
+if [ "$ACE_ENABLE_ADMIN_AUTHENTICATION" = "true" ]; then
+    echo "Enabling admin authentication..."
+    #set admin user
+    ACE_CONFIG_FILE=$ACE_WORKING_DIR/server.conf.yaml
+    sed -i 's/#basicAuth: false/basicAuth: true/' $ACE_CONFIG_FILE
+    sed -i 's/#authorizationEnabled: false/authorizationEnabled: false/' $ACE_CONFIG_FILE
+    sed -i 's/#authorizationMode/authorizationMode/' $ACE_CONFIG_FILE
+    sed -i 's/#adminRole/adminRole/' $ACE_CONFIG_FILE
+
+    adminUser=admin
+    if [ "$ACE_ADMIN_USER_NAME" != "" ]; then
+        adminUser=$ACE_ADMIN_USER_NAME
+    else
+        echo "ACE_ADMIN_USER_NAME not set. Using default: $adminUser"
+    fi
+
+    if [ "$ACE_ADMIN_USER_PASSWORD" != "" ]; then
+        adminPassword=$ACE_ADMIN_USER_PASSWORD
+    else
+        echo "ACE_ADMIN_USER_PASSWORD not set."
+        echo "Can not continue."
+        exit 1
+    fi
+    #create ACE web user with admin role
+    mqsiwebuseradmin -w $ACE_WORKING_DIR -c -u $adminUser -a $adminPassword -r admin
+
+    echo "Enabling admin authentication...done."
+
+fi
+
+
 #create bar
 echo "Creating bar-file..."
 ibmint package --input-path=$(pwd)/$ACE_APPNAME/ --output-bar-file $ACE_APPNAME.bar
@@ -68,5 +100,3 @@ else
     #start server
     exec IntegrationServer --work-dir $ACE_WORKING_DIR
 fi
-
-
