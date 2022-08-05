@@ -32,7 +32,7 @@ RUN chown -R 1001 /home/aceuser
 
 #sets the directory and file permissions to allow users in the root group to access them
 #required by OpenShift
-RUN chgrp -R 0 /app && chmod -R g=u /app && chgrp -R 0 /data && chmod -R g=u /data
+RUN chgrp -R 0 /home/aceuser && chmod -R g=u /home/aceuser
 
 # run as aceuser
 USER 1001
