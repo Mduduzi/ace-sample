@@ -30,6 +30,10 @@ EXPOSE 7600 7800
 #change ownership of all files in /home/aceuser directory
 RUN chown -R 1001 /home/aceuser
 
+#sets the directory and file permissions to allow users in the root group to access them
+#required by OpenShift
+RUN chgrp -R 0 /app && chmod -R g=u /app && chgrp -R 0 /data && chmod -R g=u /data
+
 # run as aceuser
 USER 1001
 
