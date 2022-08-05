@@ -28,11 +28,13 @@ COPY start.sh .
 EXPOSE 7600 7800
 
 #change ownership of all files in /home/aceuser directory
-RUN chown -R 1001 /home/aceuser
-
-#sets the directory and file permissions to allow users in the root group to access them
-#required by OpenShift
-RUN chgrp -R 0 /home/aceuser && chmod -R g=u /home/aceuser
+#and sets the directory and file permissions to allow users in the root group to access them (required by OpenShift)
+RUN chown -R 1001 /home/aceuser && \
+    chown -R 1001 /var/mqsi && \
+    chgrp -R 0 /home/aceuser && \
+    chmod -R g=u /home/aceuser && \
+    chgrp -R 0 /var/mqsi && \
+    chmod -R g=u /var/mqsi
 
 # run as aceuser
 USER 1001

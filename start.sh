@@ -1,5 +1,6 @@
 #!/bin/sh
 #start script for integration server
+set -e
 
 echo "Starting IBM® App Connect Enterprise for Developers..."
 
