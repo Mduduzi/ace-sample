@@ -27,7 +27,7 @@ COPY start.sh .
 # Expose ports.  7600 is admin port, 7800 is HTTP port.
 EXPOSE 7600 7800
 
-#change ownership of all files in /home/aceuser directory
+#change ownership of all files in /home/aceuser and /var/mqsi directory
 #and sets the directory and file permissions to allow users in the root group to access them (required by OpenShift)
 RUN chown -R 1001 /home/aceuser && \
     chown -R 1001 /var/mqsi && \
