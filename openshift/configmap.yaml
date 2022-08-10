@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ace-sample
+  labels:
+    app: ace-sample
+data:
+  ACE_PROPERTY_OVERRIDES: SampleFlow#message="Hello there!" 

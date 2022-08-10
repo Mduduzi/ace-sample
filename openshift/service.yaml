@@ -1,0 +1,20 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: ace-sample
+  labels:
+    app: ace-sample
+spec:
+  selector:
+    app: ace-sample
+    deployment: ace-sample
+  ports:
+    - name: http
+      protocol: TCP
+      port: 7800
+      targetPort: 7800
+    - name: admin
+      protocol: TCP
+      port: 7600
+      targetPort: 7600
+  type: ClusterIP

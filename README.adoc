@@ -2,7 +2,7 @@
 :toc: left
 :toc-title: Table of Contents
 
-This repository includes sample integration application built with https://www.ibm.com/docs/en/app-connect/12.0?topic=overview-app-connect-enterprise-toolkit[IBM App Connect Enterprise Toolkit] and Dockerfile(s) to run the integration application in a container.
+This repository includes sample integration application built with https://www.ibm.com/docs/en/app-connect/12.0?topic=overview-app-connect-enterprise-toolkit[IBM App Connect Enterprise Toolkit] and Dockerfile(s) to run the integration application in a container. Samples how to deploy the container to OpenShift is also provided.
 
 == Purpose
 
@@ -33,6 +33,7 @@ The application and container in this repo are developed using the following ass
 
 * IBM App Connect Enterprise version is 12.x.
 * IBM App Connect Enterprise is the developer edition.
+** Note that https://www.ibm.com/docs/en/app-connect/12.0?topic=mode-operation-modes#ae67700___developer[developer edition is limited to one message per second].
 * Integration application development is done using ACE toolkit in developer workstation.
 * All development is done in developer workstation.
 ** Integration server for testing runs inside toolkit.
@@ -136,6 +137,11 @@ docker run -it --rm -p 7800:7800 -p 7600:7600 -e ACE_ENABLE_ADMIN_AUTHENTICATION
 
 
 |===
+
+
+== OpenShift
+
+The sample ACE container is easily installed to OpenShift-cluster: link:openshift/README.adoc[examples how to deploy to OpenShift].
 
 == Images
 
