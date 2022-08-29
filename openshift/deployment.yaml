@@ -14,6 +14,12 @@ spec:
       labels:
         app: ace-sample
         deployment: ace-sample
+      #ACE licensing annotations
+      #see: https://www.ibm.com/docs/en/app-connect/12.0?topic=lr-installing-license-service-adding-annotations-app-connect-enterprise-containers
+      annotations:
+        productName: "IBM App Connect Enterprise for Developers - FREE"
+        productID: "53ec37b661cb40e693639822785f02f2"
+        productMetric: "FREE"
     spec:
       containers:
         - name: ace-sample
