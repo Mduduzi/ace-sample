@@ -4,8 +4,8 @@
 #based on base image with ACE Developer edition (see Dockerfile in ace-base-image directory)
 #note: instructions in base Dockerfile could be here, but base image was created so that ACE Developer Edition
 #is not downloaded every time this image is built (see Dockerfile-with-ace-install).
-#FROM kazhar/ace-sample:base
-FROM cp.icr.io/cp/appc/ace
+FROM kazhar/ace-sample:base
+#FROM cp.icr.io/cp/appc/ace
 
 ENV LICENSE=accept
 ENV ACE_WORKING_DIR=/home/aceuser/ace-server
